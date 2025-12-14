@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Фишинг.net - Не клюй на удочку!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #f72585;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4cc9f0;
+            --warning: #ffba08;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            padding-bottom: 40px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* HEADER */
+        header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 25px 0;
+            text-align: center;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .logo i {
+            font-size: 2.8rem;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* INTRO */
+        .intro {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 40px;
+            text-align: center;
+            border-left: 5px solid var(--accent);
+        }
+
+        .intro h2 {
+            color: var(--secondary);
+            margin-bottom: 15px;
+            font-size: 2rem;
+        }
+
+        .intro p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .highlight {
+            background-color: #fffacd;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px dashed var(--warning);
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #b37a00;
+        }
+
+        /* CHECKLIST */
+        .checklist {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 40px;
+        }
+
+        .checklist h2 {
+            color: var(--secondary);
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .rule {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .rule:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .rule-number {
+            background-color: var(--primary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .rule-content h3 {
+            color: var(--dark);
+            margin-bottom: 8px;
+            font-size: 1.3rem;
+        }
+
+        .rule-content p {
+            color: #555;
+        }
+
+        /* EXAMPLES */
+        .examples {
+            margin-bottom: 40px;
+        }
+
+        .examples h2 {
+            color: var(--secondary);
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 2rem;
+        }
+
+        .example-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-bad {
+            border-top: 5px solid var(--accent);
+        }
+
+        .card-good {
+            border-top: 5px solid var(--success);
+        }
+
+        .card-header {
+            padding: 20px;
+            color: white;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .bad-header {
+            background-color: var(--accent);
+        }
+
+        .good-header {
+            background-color: var(--success);
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .card-content p {
+            margin-bottom: 15px;
+        }
+
+        /* TEST */
+        .test {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 40px;
+        }
+
+        .test h2 {
+            color: var(--secondary);
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 2rem;
+        }
+
+        .quiz-question {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option {
+            padding: 12px 15px;
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .option:hover {
+            background: #f0f8ff;
+            border-color: var(--primary);
+        }
+
+        .option.correct {
+            background: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+
+        .option.wrong {
+            background: #f8d7da;
+            border-color: #dc3545;
+            color: #721c24;
+        }
+
+        .result {
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .result.show {
+            display: block;
+        }
+
+        /* ACTION */
+        .action {
+            text-align: center;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 40px 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .action h2 {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+        }
+
+        .action p {
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.95;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 15px 35px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 50px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:hover {
+            background-color: #e11570;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #666;
+            font-size: 0.9rem;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            .tagline {
+                font-size: 1rem;
+            }
+            .intro, .checklist, .test, .action {
+                padding: 20px;
+            }
+            .example-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-fish"></i>
+                <i class="fas fa-ban"></i>
+                <i class="fas fa-shield-alt"></i>
+            </div>
+            <h1>Фишинг.NET</h1>
+            <p class="tagline">Не клюй на удочку мошенников! Узнай, как распознать обман в интернете и защитить свои данные.</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="intro">
+            <h2><i class="fas fa-exclamation-triangle"></i> Внимание: Опасность в сети!</h2>
+            <p>Фишинг — это когда мошенники притворяются известными сайтами или людьми, чтобы украсть твои пароли, деньги или личные фото. Они любят целиться в школьников!</p>
+            <div class="highlight">
+                <i class="fas fa-lightbulb"></i> Цель этого сайта — за 5 минут научить тебя видеть ловушки и не попадаться в сети злоумышленников.
+            </div>
+        </section>
+
+        <section class="checklist">
+            <h2><i class="fas fa-check-circle"></i> Правила безопасности: Чек-лист</h2>
+            
+            <div class="rule">
+                <div class="rule-number">1</div>
+                <div class="rule-content">
+                    <h3>Проверяй адресную строку</h3>
+                    <p>Настоящий сайт «ВКонтакте» — vk.com, а не vk-offis.ru или vk-login.net. Всегда смотри на название сайта перед логином.</p>
+                </div>
+            </div>
+            
+            <div class="rule">
+                <div class="rule-number">2</div>
+                <div class="rule-content">
+                    <h3>Не верь срочным просьбам</h3>
+                    <p>«Твой аккаунт взломали, срочно смени пароль!», «Выиграл iPhone, жми ссылку!» — это классические уловки. Остановись и подумай.</p>
+                </div>
+            </div>
+            
+            <div class="rule">
+                <div class="rule-number">3</div>
+                <div class="rule-content">
+                    <h3>Не переходи по странным ссылкам</h3>
+                    <p>Даже от друга. Его аккаунт могли взломать. Если сомневаешься, спроси в личном сообщении (но не по той же ссылке!).</p>
+                </div>
+            </div>
+            
+            <div class="rule">
+                <div class="rule-number">4</div>
+                <div class="rule-content">
+                    <h3>Включи двухфакторную аутентификацию (2FA)</h3>
+                    <p>Это добавит второй код при входе с нового устройства. Даже если украдут пароль, аккаунт будет защищён.</p>
+                </div>
+            </div>
+            
+            <div class="rule">
+                <div class="rule-number">5</div>
+                <div class="rule-content">
+                    <h3>Расскажи взрослым</h3>
+                    <p>Если что-то кажется подозрительным или тебя уже обманули — сразу обратись к родителям, учителю или старшему брату/сестре. Это не стыдно!</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="examples">
+            <h2><i class="fas fa-eye"></i> Примеры: Отличи фальшивку от правды</h2>
+            <div class="example-cards">
+                <div class="card card-bad">
+                    <div class="card-header bad-header">
+                        <i class="fas fa-times-circle"></i> ПЛОХО: Подозрительное сообщение
+                    </div>
+                    <div class="card-content">
+                        <p><strong>От кого:</strong> «Администрация ВК» (но адрес email: support@security-vk.ru)</p>
+                        <p><strong>Текст:</strong> «Уважаемый пользователь! Ваша страница будет удалена через 12 часов из-за нарушений. Чтобы восстановить доступ, немедленно перейдите по ссылке и введите логин/пароль: vk-security-verify.ru»</p>
+                        <p><i class="fas fa-skull-crossbones"></i> <strong>Почему это фишинг:</strong> Паника, угроза, странная ссылка, просьба ввести пароль.</p>
+                    </div>
+                </div>
+                
+                <div class="card card-good">
+                    <div class="card-header good-header">
+                        <i class="fas fa-check-circle"></i> ХОРОШО: Как должно быть
+                    </div>
+                    <div class="card-content">
+                        <p><strong>Настоящее уведомление</strong> от соцсети придет:</p>
+                        <ul style="padding-left: 20px; margin-top: 10px;">
+                            <li>В официальном приложении или на сайте (проверь адрес!).</li>
+                            <li>Без требований срочно перейти по ссылке.</li>
+                            <li>Без просьбы прислать пароль или код из SMS.</li>
+                        </ul>
+                        <p style="margin-top: 15px;"><i class="fas fa-shield-alt"></i> <strong>Что делать:</strong> Если сомневаешься, зайди в соцсеть обычным способом (набрав адрес сам) и проверь уведомления там.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="test">
+            <h2><i class="fas fa-brain"></i> Проверь себя: Мини-тест</h2>
+            
+            <div class="quiz-question">
+                <p><strong>Вопрос 1:</strong> Тебе в личные сообщения от «одноклассника» пришла ссылка на «супер-игру», но сайт выглядит странно и просит ввести пароль от ВК. Что сделаешь?</p>
+                <div class="options">
+                    <div class="option" onclick="checkAnswer(this, 'wrong')">Перейду, раз от друга</div>
+                    <div class="option" onclick="checkAnswer(this, 'correct')">Напишу другу в отдельном сообщении и спрошу, это он отправлял</div>
+                    <div class="option" onclick="checkAnswer(this, 'wrong')">Введу пароль, игра выглядит круто</div>
+                </div>
+            </div>
+            
+            <div class="quiz-question">
+                <p><strong>Вопрос 2:</strong> Какой из этих адресов, скорее всего, фишинговый?</p>
+                <div class="options">
+                    <div class="option" onclick="checkAnswer(this, 'correct')">steam-community.gift-free.ru</div>
+                    <div class="option" onclick="checkAnswer(this, 'wrong')">store.steampowered.com</div>
+                    <div class="option" onclick="checkAnswer(this, 'wrong')">help.steampowered.com</div>
+                </div>
+            </div>
+            
+            <div id="quizResult" class="result"></div>
+        </section>
+
+        <section class="action">
+            <h2>Ты — главный щит своего аккаунта!</h2>
+            <p>Поделись этим сайтом с друзьями в классе или группе. Предложи учителю информатики или классному руководителю провести урок по этой теме, используя нашу презентацию с подробными методическими рекомендациями.</p>
+            <p>Помни: грамотный пользователь — неуязвимая цель для мошенников.</p>
+            <button class="btn" onclick="shareSite()"><i class="fas fa-share-alt"></i> Поделиться знаниями</button>
+        </section>
+    </main>
+
+    <footer class="container">
+        <p>© 2023 Фишинг.NET — Проект по кибербезопасности для школьников. Создано в рамках олимпиады по разработке методических рекомендаций.</p>
+        <p>Иконки: FontAwesome. Цвета: Coolors.co</p>
+    </footer>
+
+    <script>
+        function checkAnswer(optionElement, correctness) {
+            // Сброс цвета у всех вариантов в этом вопросе
+            const parent = optionElement.parentElement;
+            const allOptions = parent.querySelectorAll('.option');
+            allOptions.forEach(opt => {
+                opt.classList.remove('correct', 'wrong');
+                opt.style.pointerEvents = 'none'; // Отключаем дальнейшие клики
+            });
+            
+            // Подсветка выбранного ответа
+            optionElement.classList.add(correctness);
+            
+            // Показ общего результата
+            const resultDiv = document.getElementById('quizResult');
+            if (correctness === 'correct') {
+                resultDiv.textContent = "Верно! Ты отлично разбираешься в безопасности!";
+                resultDiv.style.backgroundColor = '#d4edda';
+                resultDiv.style.color = '#155724';
+                resultDiv.style.border = '1px solid #c3e6cb';
+            } else {
+                resultDiv.textContent = "Подумай ещё раз! Вспомни правила из чек-листа выше.";
+                resultDiv.style.backgroundColor = '#f8d7da';
+                resultDiv.style.color = '#721c24';
+                resultDiv.style.border = '1px solid #f5c6cb';
+            }
+            resultDiv.classList.add('show');
+        }
+
+        function shareSite() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Фишинг.NET - Не попадись на удочку!',
+                    text: 'Крутой сайт о том, как распознать фишинг и защитить себя в интернете. Для школьников!',
+                    url: window.location.href
+                });
+            } else {
+                // Fallback: копируем ссылку
+                navigator.clipboard.writeText(window.location.href).then(function() {
+                    alert('Ссылка на сайт скопирована в буфер! Отправь её другу в сообщении.');
+                });
+            }
+        }
+    </script>
+</body>
+</html>
+<!-- Добавьте этот код в любое место вашего HTML-файла -->
+<section id="qr-section" style="text-align: center; padding: 40px 20px; background: linear-gradient(135deg, #4361ee15 0%, #f7258515 100%); border-radius: 20px; margin: 50px 0;">
+    <h2 style="color: #3a0ca3; margin-bottom: 10px;">
+        <i class="fas fa-mobile-alt"></i> Открой на телефоне
+    </h2>
+    <p style="color: #666; margin-bottom: 25px; max-width: 500px; margin-left: auto; margin-right: auto;">
+        Просто отсканируй QR-код камерой телефона, и сайт откроется автоматически!
+    </p>
+    
+    <!-- Контейнер для QR-кода -->
+    <div id="qrcode-container" style="display: inline-block; padding: 20px; background: white; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.1);">
+        <div id="qrcode"></div>
+        <p style="margin-top: 15px; font-size: 0.9rem; color: #555;">
+            <i class="fas fa-sync-alt"></i> QR-код генерируется автоматически
+        </p>
+    </div>
+    
+    <!-- Альтернативная ссылка -->
+    <div style="margin-top: 25px;">
+        <p style="margin-bottom: 10px;">Или перейди по ссылке:</p>
+        <div id="current-url" style="background: #f0f8ff; padding: 10px 20px; border-radius: 50px; display: inline-block; font-family: monospace; color: #4361ee; font-weight: bold; word-break: break-all; max-width: 90%;">
+            <!-- Сюда подставится текущий URL -->
+        </div>
+    </div>
+</section>
+
+<!-- Подключаем библиотеку для генерации QR-кодов -->
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+
+<script>
+// Ждем загрузки страницы
+document.addEventListener('DOMContentLoaded', function() {
+    // Получаем текущий URL страницы
+    const currentUrl = window.location.href;
+    
+    // Отображаем URL на странице
+    document.getElementById('current-url').textContent = currentUrl;
+    
+    // Генерируем QR-код
+    const qrcodeContainer = document.getElementById('qrcode');
+    
+    // Очищаем контейнер
+    qrcodeContainer.innerHTML = '';
+    
+    // Создаем QR-код
+    QRCode.toCanvas(qrcodeContainer, currentUrl, {
+        width: 200,
+        height: 200,
+        margin: 1,
+        color: {
+            dark: '#4361ee', // Темные модули
+            light: '#ffffff' // Светлый фон
+        }
+    }, function(error) {
+        if (error) {
+            console.error(error);
+            // Если не удалось сгенерировать, покажем сообщение
+            qrcodeContainer.innerHTML = `
+                <div style="color: #f72585; padding: 20px;">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <p>Не удалось создать QR-код</p>
+                    <p>Вручную перейдите по ссылке выше</p>
+                </div>
+            `;
+        }
+    });
+    
+    // Добавляем инструкцию
+    const instruction = document.createElement('div');
+    instruction.innerHTML = `
+        <div style="margin-top: 20px; padding: 15px; background: #e8f4ff; border-radius: 10px; display: inline-block;">
+            <p style="margin: 0; font-size: 0.9rem;">
+                <strong><i class="fas fa-info-circle"></i> Инструкция:</strong><br>
+                1. Откройте камеру телефона<br>
+                2. Наведите на QR-код<br>
+                3. Нажмите на всплывающую ссылку
+            </p>
+        </div>
+    `;
+    qrcodeContainer.parentNode.appendChild(instruction);
+});
+
+// Функция для обновления QR-кода (если URL изменится)
+function updateQRCode(newUrl) {
+    const qrcodeContainer = document.getElementById('qrcode');
+    qrcodeContainer.innerHTML = '';
+    
+    QRCode.toCanvas(qrcodeContainer, newUrl, {
+        width: 200,
+        height: 200,
+        color: {
+            dark: '#4361ee',
+            light: '#ffffff'
+        }
+    });
+}
+</script>
